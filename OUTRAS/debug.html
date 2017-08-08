@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+        var login = "testepatrimonio@rb.gov.br";
+        var senha = "reset@2017";
+
+        $(document).ready(function() {
+//            var d = new Date();
+//            var dia = d.getDate();
+//            var mes = d.getUTCMonth()+1;
+//            var ano = d.getUTCFullYear();
+//            var hora = d.getHours();
+//            var minuto = d.getMinutes();
+//            var segundos = d.getSeconds();
+
+            //$("#texto").append(dia + "/" + mes + "/" + ano + " - " + hora + ":" + minuto + ":" + d.getSeconds() + "<br>");
+            //$("#texto").append(Date.parse("10-02-2017 15:15:15"));
+            $.ajax({
+                url: "http://localhost/web/autenticar.php?login=" + login + "&senha=" + senha
+            }).then(function (data) {
+                var json = JSON.parse(data);
+                //console.log(json);
+                console.log(json.payload);
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="texto">
+
+    </div>
+</body>
+</html>
