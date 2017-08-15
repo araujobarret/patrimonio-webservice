@@ -7,14 +7,14 @@ use \servicos\QueryExecutor as QueryExecutor;
 
 class UsuarioDAOImpl implements UsuarioDAO{
 
-	public function load($id){
+	public function detalhar($id){
 		$sql = 'SELECT * FROM usuario WHERE login = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($id);
 		return $this->getRow($sqlQuery);
 	}
 
-	public function queryAll(){
+	public function listar(){
 		$sql = 'SELECT * FROM usuario';
 		$sqlQuery = new SqlQuery($sql);
 		return $this->getList($sqlQuery);
@@ -26,14 +26,14 @@ class UsuarioDAOImpl implements UsuarioDAO{
 		return $this->getList($sqlQuery);
 	}
 
-	public function delete($login){
+	public function deletar($login){
 		$sql = 'DELETE FROM usuario WHERE login = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($login);
 		return $this->executeUpdate($sqlQuery);
 	}
 	
-	public function insert($usuario){
+	public function inserir($usuario){
 		$sql = 'INSERT INTO usuario (nome,login) VALUES (?,?)';
 		$sqlQuery = new SqlQuery($sql);
 		
@@ -45,7 +45,7 @@ class UsuarioDAOImpl implements UsuarioDAO{
 		return $id;
 	}
 	
-	public function update($usuario){
+	public function atualizar($usuario){
 		$sql = 'UPDATE usuario SET nome = ? WHERE login = ?';
 		$sqlQuery = new SqlQuery($sql);
 		
@@ -55,7 +55,7 @@ class UsuarioDAOImpl implements UsuarioDAO{
 		return $this->executeUpdate($sqlQuery);
 	}
 
-	public function clean(){
+	public function limpar(){
 		$sql = 'DELETE FROM usuario';
 		$sqlQuery = new SqlQuery($sql);
 		return $this->executeUpdate($sqlQuery);
@@ -75,6 +75,7 @@ class UsuarioDAOImpl implements UsuarioDAO{
 		$sqlQuery->set($value);
 		return $this->executeUpdate($sqlQuery);
 	}
+	
 
 	protected function readRow($row){
 		$usuario = new Usuario();

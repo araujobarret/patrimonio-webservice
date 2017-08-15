@@ -1,8 +1,25 @@
 <?php 
+
 require_once('autoload.php');
 use controllers\BemController as BemController;
 use controllers\UsuarioController as UsuarioController;
 use controllers\PessoaController as PessoaController;
+
+header('Access-Control-Allow-Origin: *');
+header("Content-Type: application/json; charset=utf-8");
+header('access-control-allow-methods: GET, POST');
+
+if (isset($_GET['login']))
+{
+	$usuario = new UsuarioController();
+	$lista = $usuario->listar_usuarios();		
+	var_dump($lista[0]);
+	// echo json_encode($lista[0]);
+}
+else 
+{
+	echo json_encode(array("erro" => "login e/ou senha inválidos"), JSON_UNESCAPED_UNICODE);
+}
 /*
 $bem = new BemController();
 $bens = $bem->listar_bens();
