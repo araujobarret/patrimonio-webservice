@@ -1,6 +1,6 @@
 <?php
 
-namespace controllers;
+namespace api;
 use daoimpl\PessoaDAOimpl as PessoaDAOimpl;
 use daoimpl\PessoaFisicaDAOimpl as PessoaFisicaDAOimpl;
 use daoimpl\PessoaJuridicaDAOimpl as PessoaJuridicaDAOimpl;

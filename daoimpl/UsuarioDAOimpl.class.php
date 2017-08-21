@@ -2,11 +2,32 @@
 namespace daoimpl;
 use \dao\UsuarioDAO as UsuarioDAO;
 use \models\Usuario as Usuario;
+use \models\UsuarioChefeSetor as UsuarioChefeSetor;
 use \servicos\SqlQuery as SqlQuery;
 use \servicos\QueryExecutor as QueryExecutor;
+use \servicos\Banco as Banco;
 
 class UsuarioDAOImpl implements UsuarioDAO{
+	
+	const TABELA = 'usuario';
+    const AD = 'rb.gov.br';
+    const PORTA_AD = 389;
+    // Segredo do JWT
+    const SECRET_JWT = 'ruibarbosafcrb';
 
+    protected $banco;
+    protected $pdo;
+    protected $ldap;
+
+<<<<<<< HEAD
+    public function __construct()
+    {
+        $this->banco = new Banco();
+        $this->pdo = $this->banco->getPdo();
+    }
+	
+=======
+>>>>>>> c389b72410f6e1868fc527c0c45613148f1d0736
 	public function detalhar($id){
 		$sql = 'SELECT * FROM usuario WHERE login = ?';
 		$sqlQuery = new SqlQuery($sql);
@@ -60,15 +81,85 @@ class UsuarioDAOImpl implements UsuarioDAO{
 		$sqlQuery = new SqlQuery($sql);
 		return $this->executeUpdate($sqlQuery);
 	}
+	
+	public function autenticar(Usuario $usuario, $token)
+    {
+        $flag = false;
+        // Verifica se o usuário já tem um token válido de acesso
+        if(!isset($token))
+        { 
+            // Conecta ao ldap e realiza o bind
+            $this->ldap = @ldap_connect(self::AD, self::PORTA_AD);
+			var_dump($this->ldap);
+            // Verifica se o usuário está previamente cadastrado
+            if ($this->hasUsuario($usuario->getLogin())){
+                if ($this->ldap)
+                {
+                    $bind = @ldap_bind($this->ldap, $usuario->getLogin(), $usuario->getSenha());
+					
+                    if ($bind){
+                        $flag = true;
+					}
+                    @ldap_close($this->ldap);
+                }
+                else{
+                    echo json_encode(array("erro" => null), JSON_UNESCAPED_UNICODE);
+				}
+			}die();
+        }
+        else{
+            echo json_encode(array("erro" => null), JSON_UNESCAPED_UNICODE);
+		}
+        // Retorna true se a autenticação for com sucesso
+        return $flag;
+    }
 
-	public function queryByNome($value){
-		$sql = 'SELECT * FROM usuario WHERE nome = ?';
-		$sqlQuery = new SqlQuery($sql);
-		$sqlQuery->set($value);
-		return $this->getList($sqlQuery);
-	}
+    private function hasUsuario($login)
+    {
+        // Verifica se o usuário existe no banco de dados
+        $sql = "SELECT login FROM " . self::TABELA . " WHERE login=\"" . $login . "\"";
+        $result = $this->pdo->query($sql);
+        $usuario = $result->fetch(\PDO::FETCH_ASSOC);
 
+        if(isset($usuario['login']))
+            return true;
+        else
+            return false;
+    }
 
+<<<<<<< HEAD
+    // Checa o tipo de usuário e retorna em formato json
+    public function getType($usuario)
+    {
+        // Verifica primeiro se ele é administrador
+        if(UsuarioPatrimonioDAO::isPatrimonio($usuario->getLogin()))
+        {
+            return json_encode(
+                array(
+                    "tipo" => "UsuarioPatrimonio",
+                    "sigla_setor" => null
+                ),
+                JSON_UNESCAPED_UNICODE
+            );
+        }
+        else
+            // Se o usuário for chefe de setor precisa pegar o respectivo setor dele
+            if(UsuarioChefeSetorDAO::isChefeSetor($usuario->getLogin()))
+            {
+                $usuarioChefeSetor = UsuarioChefeSetorDAO::retrieve($usuario->getLogin());
+                if(isset($usuarioChefeSetor))
+                    return json_encode(
+                        array(
+                            "tipo" => "UsuarioPatrimonio",
+                            "sigla_setor" => $usuarioChefeSetor->getSiglaSetor()
+                        ),
+                        JSON_UNESCAPED_UNICODE
+                    );
+                else
+                    return json_encode(array("erro" => null, JSON_UNESCAPED_UNICODE));
+            }
+    }
+=======
 	public function deleteByNome($value){
 		$sql = 'DELETE FROM usuario WHERE nome = ?';
 		$sqlQuery = new SqlQuery($sql);
@@ -76,6 +167,7 @@ class UsuarioDAOImpl implements UsuarioDAO{
 		return $this->executeUpdate($sqlQuery);
 	}
 	
+>>>>>>> c389b72410f6e1868fc527c0c45613148f1d0736
 
 	protected function readRow($row){
 		$usuario = new Usuario();

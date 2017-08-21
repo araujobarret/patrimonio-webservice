@@ -1,6 +1,6 @@
 <?php
 
-namespace patrimonio_webservice\model\dao;
+namespace \models;
 
 class Setor
 {

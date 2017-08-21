@@ -1,8 +1,8 @@
 <?php
 
-namespace patrimonio_webservice\model;
+namespace \models;
 
-use patrimonio_webservice\model\Usuario;
+use \models\Usuario as Usuario;
 
 class UsuarioChefeSetor extends Usuario
 {

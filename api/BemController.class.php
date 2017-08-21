@@ -1,6 +1,6 @@
 <?php
 
-namespace controllers;
+namespace api;
 use daoimpl\BemDAOimpl as BemDAOimpl;
 use daoimpl\EntradaDAOimpl as EntradaDAOimpl;
 use daoimpl\SaidaDAOimpl as SaidaDAOimpl;

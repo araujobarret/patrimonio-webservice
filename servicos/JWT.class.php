@@ -9,9 +9,9 @@
  *  4 - dataExpira - horario que o token expirará, que está definido por padrão em 1hora
  */
 
-namespace patrimonio_webservice\model;
+namespace servicos;
 
-use patrimonio_webservice\model\Usuario;
+use \models\Usuario as Usuario;
 
 class JWT
 {

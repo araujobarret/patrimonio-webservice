@@ -1,6 +1,10 @@
 <?php 
 
 require_once('autoload.php');
+
+use \api\BemController as BemController;
+use \api\UsuarioController as UsuarioController;
+use \api\PessoaController as PessoaController;
 use controllers\BemController as BemController;
 use controllers\UsuarioController as UsuarioController;
 use controllers\PessoaController as PessoaController;
@@ -20,6 +24,7 @@ else
 {
 	echo json_encode(array("erro" => "login e/ou senha inválidos"), JSON_UNESCAPED_UNICODE);
 }
+
 /*
 $bem = new BemController();
 $bens = $bem->listar_bens();
@@ -54,6 +59,6 @@ $juridica->cnpj = '123343443435532';
 $juridica->razaoSocial= 'CASA DE BRINQUEDOS';
 $pessoa_obj->cadastrar_pessoa($tipo,$pessoa,$fisica,$juridica);
 */ 
-$pessoa_obj = new PessoaController();
-$pessoas = $pessoa_obj->listar_Pessoas();
+$usuario = new UsuarioController();
+$usuario->autenticar();
 ?>

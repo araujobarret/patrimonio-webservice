@@ -1,6 +1,8 @@
 <?php
 namespace dao;
 
+use models\Usuario as Usuario;
+
 interface UsuarioDAO{
 
 	public function detalhar($id);
@@ -14,9 +16,9 @@ interface UsuarioDAO{
 	public function atualizar($usuario);	
 
 	public function limpar();
-
-	public function queryByNome($value);
-
-	public function deleteByNome($value);
+	
+	public function autenticar(Usuario $usuario, $token);
+	
+	public function getType($usuario);
 }
 ?>
