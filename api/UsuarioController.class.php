@@ -41,7 +41,7 @@ Class UsuarioController {
 	public function autenticar()
 	{
 		$usuario = new Usuario();
-		$_POST['login'] = "Thalles"; $_POST['senha'] = "123";
+		$_POST['login'] = "testepatrimonio@rb.gov.br"; $_POST['senha'] = "reset@2017";
 		if(!empty($_POST) && $_POST['login'] !=null && $_POST['senha'] !=null){
 			$usuario->setLogin($_POST['login']);
 			$usuario->setSenha($_POST['senha']);

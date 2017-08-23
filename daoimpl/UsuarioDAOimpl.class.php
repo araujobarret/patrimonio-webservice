@@ -19,15 +19,12 @@ class UsuarioDAOImpl implements UsuarioDAO{
     protected $pdo;
     protected $ldap;
 
-<<<<<<< HEAD
     public function __construct()
     {
         $this->banco = new Banco();
         $this->pdo = $this->banco->getPdo();
     }
 	
-=======
->>>>>>> c389b72410f6e1868fc527c0c45613148f1d0736
 	public function detalhar($id){
 		$sql = 'SELECT * FROM usuario WHERE login = ?';
 		$sqlQuery = new SqlQuery($sql);
@@ -58,11 +55,11 @@ class UsuarioDAOImpl implements UsuarioDAO{
 		$sql = 'INSERT INTO usuario (nome,login) VALUES (?,?)';
 		$sqlQuery = new SqlQuery($sql);
 		
-		$sqlQuery->set($usuario->nome);
-		$sqlQuery->set($usuario->login);
+		$sqlQuery->set($usuario->getNome());
+		$sqlQuery->set($usuario->getLogin());
 
 		$id = $this->executeInsert($sqlQuery);	
-		$usuario->login = $id;
+		$usuario->getLogin = $id;
 		return $id;
 	}
 	
@@ -87,10 +84,10 @@ class UsuarioDAOImpl implements UsuarioDAO{
         $flag = false;
         // Verifica se o usuário já tem um token válido de acesso
         if(!isset($token))
-        { 
+        {
             // Conecta ao ldap e realiza o bind
             $this->ldap = @ldap_connect(self::AD, self::PORTA_AD);
-			var_dump($this->ldap);
+			
             // Verifica se o usuário está previamente cadastrado
             if ($this->hasUsuario($usuario->getLogin())){
                 if ($this->ldap)
@@ -105,7 +102,7 @@ class UsuarioDAOImpl implements UsuarioDAO{
                 else{
                     echo json_encode(array("erro" => null), JSON_UNESCAPED_UNICODE);
 				}
-			}die();
+			}
         }
         else{
             echo json_encode(array("erro" => null), JSON_UNESCAPED_UNICODE);
@@ -127,7 +124,6 @@ class UsuarioDAOImpl implements UsuarioDAO{
             return false;
     }
 
-<<<<<<< HEAD
     // Checa o tipo de usuário e retorna em formato json
     public function getType($usuario)
     {
@@ -159,15 +155,13 @@ class UsuarioDAOImpl implements UsuarioDAO{
                     return json_encode(array("erro" => null, JSON_UNESCAPED_UNICODE));
             }
     }
-=======
+
 	public function deleteByNome($value){
 		$sql = 'DELETE FROM usuario WHERE nome = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->executeUpdate($sqlQuery);
 	}
-	
->>>>>>> c389b72410f6e1868fc527c0c45613148f1d0736
 
 	protected function readRow($row){
 		$usuario = new Usuario();
