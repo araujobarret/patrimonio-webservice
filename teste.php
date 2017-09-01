@@ -2,10 +2,10 @@
 
 require_once('autoload.php');
 
-use \api\BemController as BemController;
-use \api\UsuarioController as UsuarioController;
-use \api\PessoaController as PessoaController;
-use \models\Usuario as Usuario;
+use api\BemController as BemController;
+use api\UsuarioController as UsuarioController;
+use api\PessoaController as PessoaController;
+use models\Usuario as Usuario;
 
 header('Access-Control-Allow-Origin: *');
 header("Content-Type: application/json; charset=utf-8");

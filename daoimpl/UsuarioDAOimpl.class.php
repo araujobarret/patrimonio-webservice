@@ -87,13 +87,16 @@ class UsuarioDAOImpl implements UsuarioDAO{
         {
             // Conecta ao ldap e realiza o bind
             $this->ldap = @ldap_connect(self::AD, self::PORTA_AD);
-			
             // Verifica se o usuário está previamente cadastrado
             if ($this->hasUsuario($usuario->getLogin())){
                 if ($this->ldap)
-                {
-                    $bind = @ldap_bind($this->ldap, $usuario->getLogin(), $usuario->getSenha());
-					
+                { 
+					try{
+						$bind = ldap_bind($this->ldap, $usuario->getLogin(), $usuario->getSenha());
+					}
+					catch (Exception $e) {
+						echo 'Exceção capturada: ',  $e->getMessage(), "\n";
+					}
                     if ($bind){
                         $flag = true;
 					}
