@@ -1,11 +1,10 @@
 <?php
-
 namespace api;
 use \daoimpl\UsuarioDAOimpl as UsuarioDAOimpl;
 use \models\Usuario as Usuario;
 use \servicos\JWT as JWT;
 
-Class UsuarioController {
+Class Usuario_Controller {
 		
 	private $usuarioDaoImpl;
 	private $usuariosList;
@@ -42,7 +41,8 @@ Class UsuarioController {
 	{
 		$usuario = new Usuario();
 		$_POST['login'] = "testepatrimonio@rb.gov.br"; $_POST['senha'] = "reset@2017";
-		if(!empty($_POST) && $_POST['login'] !=null && $_POST['senha'] !=null){
+		if(!empty($_POST) && $_POST['login'] !=null && $_POST['senha'] !=null){			
+			var_dump($this->usuarioDaoImp);
 			$usuario->setLogin($_POST['login']);
 			$usuario->setSenha($_POST['senha']);
 		}
