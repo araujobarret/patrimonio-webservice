@@ -99,6 +99,7 @@ class UsuarioDAOImpl implements UsuarioDAO{
 					}
                     if ($bind){
                         $flag = true;
+			echo 'Autenticou ldap';
 					}
                     @ldap_close($this->ldap);
                 }

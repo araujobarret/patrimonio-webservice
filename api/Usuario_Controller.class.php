@@ -41,8 +41,7 @@ Class Usuario_Controller {
 	{
 		$usuario = new Usuario();
 		$_POST['login'] = "testepatrimonio@rb.gov.br"; $_POST['senha'] = "reset@2017";
-		if(!empty($_POST) && $_POST['login'] !=null && $_POST['senha'] !=null){			
-			var_dump($this->usuarioDaoImp);
+		if(!empty($_POST) && $_POST['login'] !=null && $_POST['senha'] !=null){	
 			$usuario->setLogin($_POST['login']);
 			$usuario->setSenha($_POST['senha']);
 		}
@@ -50,7 +49,7 @@ Class Usuario_Controller {
 			if ($this->usuarioDaoImpl->autenticar($usuario, null))
 			{
 				// Pega o json e decodifica referente às informações do tipo de usuário, e caso possua setor também
-				$this->tipo = $this->usuarioDaoImp->getType($usuario);
+				$this->tipo = $this->usuarioDaoImpl->getType($usuario);
 				$this->tipo = json_decode($tipo);
 
 				// Gera o token
