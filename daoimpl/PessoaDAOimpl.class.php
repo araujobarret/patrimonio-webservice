@@ -8,7 +8,7 @@ use \servicos\QueryExecutor as QueryExecutor;
 
 class PessoaDAOimpl implements PessoaDAO{
 
-	public function detalhar($id){
+	public function listarId($id){
 		$sql = 'SELECT * FROM pessoa WHERE cod = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->setNumber($id);

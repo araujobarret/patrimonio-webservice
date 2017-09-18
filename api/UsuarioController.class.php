@@ -1,10 +1,12 @@
 <?php
+
 namespace api;
 use \daoimpl\UsuarioDAOimpl as UsuarioDAOimpl;
+use \daoimpl\UsuarioPatrimonioDAOimpl as UsuarioPatrimonioDAOimpl;
 use \models\Usuario as Usuario;
 use \servicos\JWT as JWT;
 
-Class Usuario_Controller {
+Class UsuarioController {
 		
 	private $usuarioDaoImpl;
 	private $usuariosList;
@@ -50,7 +52,7 @@ Class Usuario_Controller {
 			{
 				// Pega o json e decodifica referente às informações do tipo de usuário, e caso possua setor também
 				$this->tipo = $this->usuarioDaoImpl->getType($usuario);
-				$this->tipo = json_decode($tipo);
+				$this->tipo = json_decode($this->tipo);
 
 				// Gera o token
 				if(isset($this->tipo->tipo)){

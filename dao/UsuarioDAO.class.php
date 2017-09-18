@@ -1,11 +1,12 @@
 <?php
+
 namespace dao;
 
 use models\Usuario as Usuario;
 
 interface UsuarioDAO{
 
-	public function detalhar($id);
+	public function listarId($id);
 
 	public function listar();
 	

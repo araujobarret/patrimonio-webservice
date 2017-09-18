@@ -3,7 +3,7 @@ namespace dao;
 
 interface PessoaDAO{
 
-	public function detalhar($id);
+	public function listarId($id);
 
 	public function listar();
 

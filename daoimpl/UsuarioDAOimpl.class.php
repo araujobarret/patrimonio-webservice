@@ -1,6 +1,9 @@
 <?php
+
 namespace daoimpl;
+
 use \dao\UsuarioDAO as UsuarioDAO;
+use \daoimpl\UsuarioPatrimonioDAOimpl as UsuarioPatrimonioDAOimpl;
 use \models\Usuario as Usuario;
 use \models\UsuarioChefeSetor as UsuarioChefeSetor;
 use \servicos\SqlQuery as SqlQuery;
@@ -25,7 +28,7 @@ class UsuarioDAOImpl implements UsuarioDAO{
         $this->pdo = $this->banco->getPdo();
     }
 	
-	public function detalhar($id){
+	public function listarId($id){
 		$sql = 'SELECT * FROM usuario WHERE login = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($id);
@@ -34,12 +37,6 @@ class UsuarioDAOImpl implements UsuarioDAO{
 
 	public function listar(){
 		$sql = 'SELECT * FROM usuario';
-		$sqlQuery = new SqlQuery($sql);
-		return $this->getList($sqlQuery);
-	}
-	
-	public function queryAllOrderBy($orderColumn){
-		$sql = 'SELECT * FROM usuario ORDER BY '.$orderColumn;
 		$sqlQuery = new SqlQuery($sql);
 		return $this->getList($sqlQuery);
 	}
@@ -95,11 +92,10 @@ class UsuarioDAOImpl implements UsuarioDAO{
 						$bind = ldap_bind($this->ldap, $usuario->getLogin(), $usuario->getSenha());
 					}
 					catch (Exception $e) {
-						echo 'Exceção capturada: ',  $e->getMessage(), "\n";
+                        json_encode(array("erro" => null, "mensagem" => "Não foi possível entrar em contato com o AD"), JSON_UNESCAPED_UNICODE);
 					}
                     if ($bind){
                         $flag = true;
-			echo 'Autenticou ldap';
 					}
                     @ldap_close($this->ldap);
                 }
@@ -132,7 +128,7 @@ class UsuarioDAOImpl implements UsuarioDAO{
     public function getType($usuario)
     {
         // Verifica primeiro se ele é administrador
-        if(UsuarioPatrimonioDAO::isPatrimonio($usuario->getLogin()))
+        if(UsuarioPatrimonioDAOimpl::isPatrimonio($usuario->getLogin()))
         {
             return json_encode(
                 array(
@@ -160,53 +156,6 @@ class UsuarioDAOImpl implements UsuarioDAO{
             }
     }
 
-	public function deleteByNome($value){
-		$sql = 'DELETE FROM usuario WHERE nome = ?';
-		$sqlQuery = new SqlQuery($sql);
-		$sqlQuery->set($value);
-		return $this->executeUpdate($sqlQuery);
-	}
 
-	protected function readRow($row){
-		$usuario = new Usuario();
-		
-		$usuario->setLogin($row['login']);
-		$usuario->setNome($row['nome']);
-
-		return $usuario;
-	}
-	
-	protected function getList($sqlQuery){
-		$tab = QueryExecutor::execute($sqlQuery);
-		$ret = array();
-		for($i=0;$i<count($tab);$i++){
-			$ret[$i] = $this->readRow($tab[$i]);
-		}
-		return $ret;
-	}
-	
-	protected function getRow($sqlQuery){
-		$tab = QueryExecutor::execute($sqlQuery);
-		if(count($tab)==0){
-			return null;
-		}
-		return $this->readRow($tab[0]);		
-	}
-	
-	protected function execute($sqlQuery){
-		return QueryExecutor::execute($sqlQuery);
-	}
-	
-	protected function executeUpdate($sqlQuery){
-		return QueryExecutor::executeUpdate($sqlQuery);
-	}
-	
-	protected function querySingleResult($sqlQuery){
-		return QueryExecutor::queryForString($sqlQuery);
-	}
-
-	protected function executeInsert($sqlQuery){
-		return QueryExecutor::executeInsert($sqlQuery);
-	}
 }
 ?>
