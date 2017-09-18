@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="20a90b4d-00f1-40c5-8c22-4f3bbc5340af" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/api/.Usuario_Controller.class.swp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dao/UsuarioPatrimonioDAO.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/daoimpl/UsuarioPatrimonioDAOimpl.php" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/Banco.class.php" afterPath="$PROJECT_DIR$/api/Banco.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/daoimpl/UsuarioDAOimpl.class.php" afterPath="$PROJECT_DIR$/daoimpl/UsuarioDAOimpl.class.php" />
-    </list>
+    <list default="true" id="20a90b4d-00f1-40c5-8c22-4f3bbc5340af" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -274,12 +267,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1505742733910</updated>
-      <workItem from="1505742735349" duration="5333000" />
+      <workItem from="1505742735349" duration="5923000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5333000" />
+    <option name="totallyTimeSpent" value="5923000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1600" height="873" extended-state="6" />
