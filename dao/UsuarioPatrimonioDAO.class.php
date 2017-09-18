@@ -2,7 +2,7 @@
 
 namespace dao;
 
-use models\Usuario as Usuario;
+use \models\Usuario as Usuario;
 
 interface UsuarioPatrimonioDAO
 {

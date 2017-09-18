@@ -1,6 +1,6 @@
 <?php
 
-namespace patrimonio_webservice\controller;
+namespace servicos;
 
 Class Banco {
 

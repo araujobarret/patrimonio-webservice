@@ -2,9 +2,9 @@
 
 namespace daoimpl;
 
-use \model\Usuario as Usuario;
+use \models\Usuario as Usuario;
 use \dao\UsuarioPatrimonioDAO as UsuarioPatrimonioDAO;
-use \api\Banco as Banco;
+use \servicos\Banco as Banco;
 
 class UsuarioPatrimonioDAOimpl implements UsuarioPatrimonioDAO
 {

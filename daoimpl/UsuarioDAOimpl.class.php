@@ -15,6 +15,7 @@ class UsuarioDAOImpl implements UsuarioDAO{
 	const TABELA = 'usuario';
     const AD = 'rb.gov.br';
     const PORTA_AD = 389;
+
     // Segredo do JWT
     const SECRET_JWT = 'ruibarbosafcrb';
 
